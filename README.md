@@ -60,6 +60,6 @@ An abstract class is the foundation for another object. When a class says "I ext
     }
 ```
 
-Very important point: In an abstract class you can predefine working method, but you can't in interface.
+Very important point: In an abstract class you can predefine the working method, but you can't in an interface.
 
 ----
