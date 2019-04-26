@@ -8,6 +8,7 @@ Is it your first time or are you a senior? Don't worry. Here is a cheat sheet to
 - [What are magic methods? Tell me 3 magic methods.](#what-are-magic-methods-tell-me-3-magic-methods)
 - [PHP support multiple inheritance?](#php-support-multiple-inheritance)
 - [Interface vs abstract class, tell me the diference.](#interface-vs-abstract-class-tell-me-the-diference)
+- What the final keyword does?
 
 -----
 ### What are [magic methods](https://www.php.net/manual/en/language.oop5.magic.php)? Tell me 3 magic methods.
@@ -69,3 +70,23 @@ An abstract class is the foundation for another object. When a class says "I ext
 Very important point: In an abstract class you can predefine the working method, but you can't in an interface.
 
 ----
+
+### What the final keyword does?
+
+If you prefix a function in a class with the final keyword, the child class cannot overwrite that function.
+
+```php
+class BaseClass {
+   final public function moreTesting() {
+       echo "BaseClass::moreTesting() called\n";
+   }
+}
+
+class ChildClass extends BaseClass {
+   public function moreTesting() {
+       echo "ChildClass::moreTesting() called\n";
+   }
+}
+// Results in Fatal error: Cannot override final method BaseClass::moreTesting()
+// You cannot override final methods even if they are defined as private.
+```
