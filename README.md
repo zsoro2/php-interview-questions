@@ -9,7 +9,7 @@ Is it your first time or are you a senior? Don't worry. Here is a cheat sheet to
 - [PHP support multiple inheritance?](#php-support-multiple-inheritance)
 - [Interface vs abstract class, tell me the diference.](#interface-vs-abstract-class-tell-me-the-diference)
 - [What the final keyword does?](#what-the-final-keyword-does)
-- What does the following code?
+- [What does the following code?](#what-does-the-following-code)
 
 -----
 ### What are [magic methods](https://www.php.net/manual/en/language.oop5.magic.php)? Tell me 3 magic methods.
