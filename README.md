@@ -92,6 +92,8 @@ class ChildClass extends BaseClass {
 // You cannot override final methods even if they are defined as private.
 ```
 
+----
+
 ### What does the following code?
 
 ```php
