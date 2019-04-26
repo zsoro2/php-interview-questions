@@ -8,7 +8,7 @@ Is it your first time or are you a senior? Don't worry. Here is a cheat sheet to
 - [What are magic methods? Tell me 3 magic methods.](#what-are-magic-methods-tell-me-3-magic-methods)
 - [PHP support multiple inheritance?](#php-support-multiple-inheritance)
 - [Interface vs abstract class, tell me the diference.](#interface-vs-abstract-class-tell-me-the-diference)
-- What the final keyword does?
+- [What the final keyword does?](#what-the-final-keyword-does)
 
 -----
 ### What are [magic methods](https://www.php.net/manual/en/language.oop5.magic.php)? Tell me 3 magic methods.
@@ -71,7 +71,7 @@ Very important point: In an abstract class you can predefine the working method,
 
 ----
 
-### What the final keyword does?
+### What the [final](https://www.php.net/manual/en/language.oop5.final.php) keyword does?
 
 If you prefix a function in a class with the final keyword, the child class cannot overwrite that function.
 
