@@ -14,6 +14,7 @@ Is it your first time or are you a senior? Don't worry. Here is a cheat sheet to
 - [Explain what are closures?](#explain-what-are-closures)
 - [Tell what we need to know about error handling in PHP](#tell-what-we-need-to-know-about-error-handling-in-php)
 - [Explain SOLID with examples](#explain-solid-with-examples)
+- [Explain Dependency Injection](#explain-dependency-injection)
 
 -----
 ### What are [magic methods](https://www.php.net/manual/en/language.oop5.magic.php)? Tell me 3 magic methods.
@@ -346,3 +347,33 @@ class UserDataProcessor {
 }
 ```
 
+----
+
+#### Explain Dependency Injection
+
+Dependency Injection (DI) in PHP is like giving a class its 'tools' from outside rather than building them inside. It makes your code flexible (easy to change), clear (easy to understand), and test-friendly (easy to check if it's working). 
+
+```php
+// without DI
+class Car {
+    private $engine;
+    
+    public function __construct() {
+        $this->engine = new Engine(); // The Car class is directly dependent on the Engine class.
+    }
+}
+
+// with DI
+
+class Car {
+    private $engine;
+    
+    public function __construct(Engine $engine) {
+        $this->engine = $engine; // The Engine dependency is injected into the Car class.
+    }
+}
+
+// Creating an Engine instance and injecting it into the Car class.
+$engine = new Engine();
+$car = new Car($engine);
+```
