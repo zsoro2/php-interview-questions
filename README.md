@@ -10,6 +10,7 @@ Is it your first time or are you a senior? Don't worry. Here is a cheat sheet to
 - [Interface vs abstract class, tell me the difference.](#interface-vs-abstract-class-tell-me-the-diference)
 - [What the final keyword does?](#what-the-final-keyword-does)
 - [What does the following code?](#what-does-the-following-code)
+- [What are namespaces and how to use them?](#what-are-namespaces-and-how-to-use-them)
 - [Explain what are closures?](#explain-what-are-closures)
 - [Tell what we need to know about error handling in PHP](#tell-what-we-need-to-know-about-error-handling-in-php)
 - [Explain SOLID with examples](#explain-solid-with-examples)
@@ -143,6 +144,24 @@ echo $c;
 <p></p>
 </details>
 
+---
+
+### What are namespaces and how to use them?
+
+Namespaces in PHP prevent naming conflicts by encapsulating entities like classes, interfaces, functions, and constants. They're like directories for file systems, ensuring that two classes with the same name can coexist if they're in different namespaces.
+
+To declare a namespace, you use the namespace keyword at the top of your PHP file, before any non-comment code. Here's a brief example:
+
+```php
+namespace MyProject\Database;
+
+class Connection {}
+```
+
+```php
+// Using the class from another file
+$connection = new \MyProject\Database\Connection();
+```
 ----
 
 ### Explain what are [closures](https://www.php.net/manual/en/functions.anonymous.php)?
@@ -161,8 +180,6 @@ $exampleClosure = function() use ($message) {
 };
 
 $exampleClosure(); // Outputs 'Hello'
-
-
 ```
 
 ----
