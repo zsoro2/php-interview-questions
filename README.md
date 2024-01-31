@@ -12,6 +12,7 @@ Is it your first time or are you a senior? Don't worry. Here is a cheat sheet to
 - [What does the following code?](#what-does-the-following-code)
 - [Explain what are closures?](#explain-what-are-closures)
 - [Tell what we need to know about error handling in PHP](#tell-what-we-need-to-know-about-error-handling-in-php)
+- [Explain SOLID with examples](#explain-solid-with-examples)
 
 -----
 ### What are [magic methods](https://www.php.net/manual/en/language.oop5.magic.php)? Tell me 3 magic methods.
@@ -142,6 +143,7 @@ echo $c;
 <p></p>
 </details>
 
+----
 
 ### Explain what are [closures](https://www.php.net/manual/en/functions.anonymous.php)?
 
@@ -162,6 +164,8 @@ $exampleClosure(); // Outputs 'Hello'
 
 
 ```
+
+----
 
 ### Tell what we need to know about error handling in PHP
 
@@ -195,5 +199,133 @@ set_error_handler("customErrorHandler");
 // $errfile - holds the filename in which the error occurred.
 // $errline - holds the line number in the file where the error occurred.
 
+```
+
+----
+
+### Explain SOLID with examples
+
+**Single Responsibility principle**
+
+The Single Responsibility Principle means each class should have just one job. Think of it like a worker in a team, where every person has their own clear task. This keeps things simple and organized, making it easier to manage and update the system.
+
+```php
+class User {
+    function getUserData() { /* ... */ }
+    function saveUserData() { /* ... */ }
+}
+
+class UserReportGenerator {
+    function generateReport(User $user) { /* ... */ }
+}
+```
+
+**Open/Closed Principle**
+
+The Open/Closed Principle is about designing your classes so that they are open for extension but closed for modification. In simpler terms, it means you should be able to add new features or behaviors to a class without changing its existing code. 
+
+```php
+interface Shape {
+    public function area();
+}
+
+class Circle implements Shape {
+    private $radius;
+
+    public function area() {
+        return pi() * $this->radius * $this->radius;
+    }
+}
+
+class Square implements Shape {
+    private $length;
+
+    public function area() {
+        return $this->length * $this->length;
+    }
+}
+```
+
+**Liskov Substitution Principle**
+
+The Liskov Substitution Principle ensures that objects of a superclass can be replaced with objects of its subclasses without affecting the application's correctness. 
+
+It's like saying, if you have a program that uses a bird, you should be able to swap in a different kind of bird, like a sparrow or a pigeon, and everything should still work just fine. It ensures that a subclass can stand in for its parent class without any errors or unexpected behavior.
+
+```php
+
+// In this setup, Bird is a general class, FlyingBird is a subclass for birds that can fly,
+// and Penguin is a subclass for a bird that can't fly (a penguin).
+// According to LSP, you should be able to replace instances of Bird with instances of its subclasses (FlyingBird or Penguin) without altering the correctness of the program.
+
+class Bird {
+    function move() { /* ... */ }
+}
+
+class FlyingBird extends Bird {
+    function fly() { /* ... */ }
+}
+
+class Penguin extends Bird { /* No fly method */ }
+
+```
+
+**Interface Segregation Principle**
+
+It means designing your interfaces in such a way that your classes don't have to implement methods they don't need. It encourages splitting large, multipurpose interfaces into smaller, more specific ones so that clients only need to know about the methods that are of interest to them. This leads to a cleaner, more organized codebase and reduces the impact of changes.
+
+```php
+// Split into two interfaces: Workable and Eatable. Classes implement only the interfaces that are relevant to them.
+
+interface Workable {
+    function work();
+}
+
+interface Eatable {
+    function eat();
+}
+
+class HumanWorker implements Workable, Eatable {
+    function work() { /* ... */ }
+    function eat() { /* ... */ }
+}
+
+class RobotWorker implements Workable {
+    function work() { /* ... */ }
+    // No need to implement eat()
+}
+```
+
+**Dependency Inversion Principle**
+
+DIP is focusing on decoupling high-level modules from low-level modules by introducing an abstraction layer. 
+
+- High-level modules should not depend on low-level modules. Both should depend on abstractions. 
+- Abstractions should not depend on details. Details should depend on abstractions
+
+```php
+// Imagine you have a TV remote (the UserDataProcessor) that needs batteries (the DatabaseInterface) to work.
+// It doesn't matter what brand of batteries you use (like MySQLDatabase or any other database), as long as they fit the remote.
+
+interface DatabaseInterface {
+    function fetchData();
+}
+
+class MySQLDatabase implements DatabaseInterface {
+    function fetchData() { /* ... */ }
+}
+
+class UserDataProcessor {
+    private $database;
+
+    function __construct(DatabaseInterface $db) {
+        $this->database = $db;
+    }
+
+    function processData() {
+        $data = $this->database->fetchData();
+        // process data
+    }
+}
 ```
 
