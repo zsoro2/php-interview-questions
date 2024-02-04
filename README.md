@@ -272,19 +272,35 @@ It's like saying, if you have a program that uses a bird, you should be able to 
 
 ```php
 
-// In this setup, Bird is a general class, FlyingBird is a subclass for birds that can fly,
-// and Penguin is a subclass for a bird that can't fly (a penguin).
-// According to LSP, you should be able to replace instances of Bird with instances of its subclasses (FlyingBird or Penguin) without altering the correctness of the program.
+// In this setup, Bird is the superclass. Sparrow and Penguin are subclasses.
+// According to LSP, you should be able to replace instances of Bird with instances of its subclasses (Sparrow or Penguin) without altering the correctness of the program.
 
 class Bird {
-    function move() { /* ... */ }
+    public function fly() {
+        echo "I can fly!";
+    }
 }
 
-class FlyingBird extends Bird {
-    function fly() { /* ... */ }
+class Sparrow extends Bird {
+    // Sparrow flies, so no need to override fly()
 }
 
-class Penguin extends Bird { /* No fly method */ }
+class Penguin extends Bird {
+    public function fly() {
+        throw new Exception("I can't fly!");
+    }
+}
+
+function makeBirdFly(Bird $bird) {
+    $bird->fly();
+}
+
+$bird1 = new Sparrow();
+$bird2 = new Penguin();
+
+makeBirdFly($bird1); // Works fine
+makeBirdFly($bird2); // Error: breaks LSP
+
 
 ```
 
