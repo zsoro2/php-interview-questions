@@ -15,6 +15,7 @@ Is it your first time or are you a senior? Don't worry. Here is a cheat sheet to
 - [Tell what we need to know about error handling in PHP](#tell-what-we-need-to-know-about-error-handling-in-php)
 - [Explain SOLID with examples](#explain-solid-with-examples)
 - [Explain Dependency Injection](#explain-dependency-injection)
+- [Composition vs Inheritance](#composition-vs-inheritance)
 
 -----
 ### What are [magic methods](https://www.php.net/manual/en/language.oop5.magic.php)? Tell me 3 magic methods.
@@ -365,7 +366,7 @@ class UserDataProcessor {
 
 ----
 
-#### Explain Dependency Injection
+### Explain Dependency Injection
 
 Dependency Injection (DI) in PHP is like giving a class its 'tools' from outside rather than building them inside. It makes your code flexible (easy to change), clear (easy to understand), and test-friendly (easy to check if it's working). 
 
@@ -393,3 +394,145 @@ class Car {
 $engine = new Engine();
 $car = new Car($engine);
 ```
+
+----
+
+### Composition vs Inheritance
+
+- Inheritance is “is-a” relationship.
+- Composition is “has-a” relationship.
+
+Most of the time use composition over inheritance because composition is much more flexible. 
+
+[Detailed explonation](https://www.youtube.com/watch?v=hxGOiiR9ZKg)
+
+
+
+##### Inheritance example code
+
+```php
+
+<?php
+
+class Image {
+    protected $filename;
+    protected $size;
+
+    public function __construct($filename) {
+        $this->filename = $filename;
+    }
+
+    public function setSize($size) {
+        $this->size = $size;
+    }
+
+    public function getSize() {
+        return $this->size;
+    }
+
+    // A general method for preparing an image. It could be overridden by subclasses.
+    public function prepareForSave() {
+        echo "Preparing image for save. Filename: " . $this->filename . "\n";
+    }
+}
+
+class PngImage extends Image {
+    // Specific implementation for PNG images
+    public function prepareForSave() {
+        $this->setSize("1024x768");
+        echo "Preparing PNG image for save. Size set to: " . $this->getSize() . ". Filename: " . $this->filename . "\n";
+    }
+}
+
+class JpegImage extends Image {
+    // Specific implementation for JPEG images
+    public function prepareForSave() {
+        $this->setSize("800x600");
+        echo "Preparing JPEG image for save. Size set to: " . $this->getSize() . ". Filename: " . $this->filename . "\n";
+    }
+}
+
+class BmpImage extends Image {
+    // Specific implementation for BMP images
+    public function prepareForSave() {
+        $this->setSize("640x480");
+        echo "Preparing BMP image for save. Size set to: " . $this->getSize() . ". Filename: " . $this->filename . "\n";
+    }
+}
+
+// Example Usage
+$png = new PngImage("example.png");
+$png->prepareForSave();
+
+$jpeg = new JpegImage("example.jpeg");
+$jpeg->prepareForSave();
+
+$bmp = new BmpImage("example.bmp");
+$bmp->prepareForSave();
+
+```
+
+##### Composition example code
+
+```php
+
+class Image {
+    protected $filename;
+    protected $size;
+
+    public function __construct($filename) {
+        $this->filename = $filename;
+    }
+
+    public function setSize($size) {
+        $this->size = $size;
+    }
+
+    public function getSize() {
+        return $this->size;
+    }
+}
+
+interface ImageSaver {
+    public function prepareForSave();
+}
+
+class PngImage implements ImageSaver {
+    protected $image;
+
+    // Dependency Injection through the constructor
+    public function __construct(Image $image) {
+        $this->image = $image;
+    }
+
+    public function prepareForSave() {
+        $this->image->setSize("1024x768");
+        echo "Preparing PNG image for save. Size set to: " . $this->image->getSize() . "\n";
+    }
+}
+
+class JpegImage implements ImageSaver {
+    protected $image;
+
+    // Dependency Injection through the constructor
+    public function __construct(Image $image) {
+        $this->image = $image;
+    }
+
+    public function prepareForSave() {
+        $this->image->setSize("800x600");
+        echo "Preparing JPEG image for save. Size set to: " . $this->image->getSize() . "\n";
+    }
+}
+
+// Example Usage
+$pngImage = new Image("example.png");
+$png = new PngImage($pngImage);
+$png->prepareForSave();
+
+$jpegImage = new Image("example.jpeg");
+$jpeg = new JpegImage($jpegImage);
+$jpeg->prepareForSave();
+```
+
+----
