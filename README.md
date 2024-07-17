@@ -267,6 +267,8 @@ class Square implements Shape {
 
 **Liskov Substitution Principle**
 
+A child class should be able to do everything what a parent class can.
+
 The Liskov Substitution Principle ensures that objects of a superclass can be replaced with objects of its subclasses without affecting the application's correctness. 
 
 It's like saying, if you have a program that uses a bird, you should be able to swap in a different kind of bird, like a sparrow or a pigeon, and everything should still work just fine. It ensures that a subclass can stand in for its parent class without any errors or unexpected behavior.
